@@ -24,7 +24,9 @@ export function ProfileHeader() {
         {/* Flag of Viet Nam */}
         <Image
           className="absolute top-0 -left-px h-8 sm:h-9"
-          src="https://media.gettyimages.com/id/472317739/vector/flag-of-india.jpg?s=612x612&w=0&k=20&c=ejlQRX4C_Mb40wz1JQcB5vKYcOKlfRtry2W6UcX6mlo="
+          src="/indian-flag.png"
+          width={50}
+          height={40}
           alt="Flag of India"
         />
 
