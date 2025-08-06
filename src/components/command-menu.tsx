@@ -4,16 +4,12 @@ import { useCommandState } from "cmdk";
 import type { LucideProps } from "lucide-react";
 import {
   BriefcaseBusinessIcon,
-  CircleUserIcon,
   CornerDownLeftIcon,
-  DownloadIcon,
   LetterTextIcon,
   MoonStarIcon,
   RssIcon,
   SunIcon,
   TextIcon,
-  TriangleDashedIcon,
-  TypeIcon,
 } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -35,8 +31,7 @@ import { cn } from "@/lib/utils";
 import type { Post } from "@/types/blog";
 import { copyText } from "@/utils/copy";
 
-import { ChanhDaiMark, getMarkSVG } from "./chanhdai-mark";
-import { getWordmarkSVG } from "./chanhdai-wordmark";
+import { ChanhDaiMark } from "./chanhdai-mark";
 import { Icons } from "./icons";
 import { Button } from "./ui/button";
 import { Separator } from "./ui/separator";
@@ -44,7 +39,6 @@ import { Separator } from "./ui/separator";
 type CommandLinkItem = {
   title: string;
   href: string;
-
   icon?: React.ComponentType<LucideProps>;
   iconImage?: string;
   keywords?: string[];
@@ -101,9 +95,7 @@ const SOCIAL_LINK_ITEMS: CommandLinkItem[] = SOCIAL_LINKS.map((item) => ({
 
 export function CommandMenu({ posts }: { posts: Post[] }) {
   const router = useRouter();
-
-  const { setTheme, resolvedTheme } = useTheme();
-
+  const { setTheme } = useTheme();
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -146,12 +138,6 @@ export function CommandMenu({ posts }: { posts: Post[] }) {
     [router]
   );
 
-  const handleCopyText = useCallback((text: string, message: string) => {
-    setOpen(false);
-    copyText(text);
-    toast.success(message);
-  }, []);
-
   const handleThemeChange = useCallback(
     (theme: "light" | "dark" | "system") => {
       setOpen(false);
@@ -160,15 +146,11 @@ export function CommandMenu({ posts }: { posts: Post[] }) {
     [setTheme]
   );
 
-  const { blogLinks, componentLinks } = useMemo(
-    () => ({
-      blogLinks: posts
+  const blogLinks = useMemo(
+    () =>
+      posts
         .filter((post) => post.metadata?.category !== "components")
         .map(postToCommandLinkItem),
-      componentLinks: posts
-        .filter((post) => post.metadata?.category === "components")
-        .map(postToCommandLinkItem),
-    }),
     [posts]
   );
 
@@ -239,23 +221,11 @@ export function CommandMenu({ posts }: { posts: Post[] }) {
 
           <CommandSeparator />
 
-          {/* <CommandLinkGroup
-            heading="Components"
-            links={componentLinks}
-            fallbackIcon={Icons.react}
-            onLinkSelect={handleOpenLink}
-          /> */}
-
-          {/* <CommandSeparator /> */}
-
           <CommandLinkGroup
             heading="Social Links"
             links={SOCIAL_LINK_ITEMS}
             onLinkSelect={handleOpenLink}
           />
-
-          <CommandSeparator />
-
 
           <CommandSeparator />
 
@@ -344,21 +314,9 @@ type CommandMetaMap = Map<
 function buildCommandMetaMap() {
   const commandMetaMap: CommandMetaMap = new Map();
 
-  commandMetaMap.set("Download vCard", { commandKind: "command" });
-
   commandMetaMap.set("Light", { commandKind: "command" });
   commandMetaMap.set("Dark", { commandKind: "command" });
   commandMetaMap.set("Auto", { commandKind: "command" });
-
-  commandMetaMap.set("Copy Mark as SVG", {
-    commandKind: "command",
-  });
-  commandMetaMap.set("Copy Logotype as SVG", {
-    commandKind: "command",
-  });
-  commandMetaMap.set("Download Brand Assets", {
-    commandKind: "command",
-  });
 
   SOCIAL_LINK_ITEMS.forEach((item) => {
     commandMetaMap.set(item.title, {
