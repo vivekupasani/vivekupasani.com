@@ -15,7 +15,7 @@ export const USER = {
   address: "Nadiad, Gujarat, India",
   phoneNumber: "KzkxNjM1NDI2MzMzMQ==", // E.164 format, base64 encoded (https://t.io.vn/base64-string-converter)
   email: "dml2ZWt1cGFzYW5pOTg0QGdtYWlsLmNvbQ==", // base64 encoded
-  website: "https://vivekupasani.onrender.com",
+  website: "https://vivekupasani.vercel.app",
   otherWebsites: [
     "https://dai.ng",
     "https://dai.so",
@@ -32,14 +32,9 @@ export const USER = {
   jobTitle: "software developer",
   jobs: [
     {
-      title: "Software Developer",
-      company: "Boulevard Legacy LLC",
-      website: "https://www.boulevardlegacy.com/",
-    },
-    {
       title: "Founder",
       company: "Acernity",
-      website: "",
+      website: "https://www.linkedin.com/company/acernityhq/",
     },
   ],
   about: `
