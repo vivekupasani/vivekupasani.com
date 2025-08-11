@@ -41,15 +41,14 @@ export default function Page() {
         <TeckStack />
         <Separator />
 
-        <Blog />
-        <Separator />
-
         <Experiences />
         <Separator />
 
         <Projects />
         <Separator />
 
+        <Blog />
+        <Separator />
         {/* <Awards />
         <Separator />
 
